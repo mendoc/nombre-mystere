@@ -21,6 +21,7 @@ logger = logging.getLogger(__name__)
 # Elle sert également pour lancer une partie
 def start(update, context):
     """Envoyer le message de démarrage quand la commande /start est exécutée."""
+    logger.warning('Chat ID : "%s"', update.message.chat.id)
 
     # Sauvegarde du nombre mystère dans un fichier
     fichier = open(f"{update.message.chat.id}.txt", "w")
