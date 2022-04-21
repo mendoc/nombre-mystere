@@ -3,6 +3,7 @@ $(document).ready(function(){
     let partie = {}
     let tentativesEl = $("#tentatives")
     let messageNouvPartie = "Quel est le nombre mystère ? <br> Il est compris entre 1 et 100"
+    let chrono = null;
 
     // Traitement principal
     nouvellePartie()
@@ -50,10 +51,16 @@ $(document).ready(function(){
         let message = ""
 
         partie.tentatives++
+
+        // On lance le chrono à la première tentative
+        if (partie.tentatives == 1) {
+            chrono = setInterval(modifierTemps, 1000);
+        }
         
         if (partie.nombre === partie.proposition) {
             message = `Bravo ! vous avez trouvé le nombre mystère`
             partie.fini = true
+            terminerPartie()
         } else {
             if (partie.nombre < partie.proposition) comparaison = "plus petit"
             else if (partie.nombre > partie.proposition) comparaison = "plus grand"
@@ -72,12 +79,14 @@ $(document).ready(function(){
             MAX: 100,
             tentatives: 0,
             fini: false,
+            tempsEcoule: 0,
         }
 
         partie.nombre = Math.floor(Math.random() * partie.MAX) + 1
 
         effacer()
         $("#message").html(messageNouvPartie)
+        $("#temps").text(`${partie.tempsEcoule}s`)
         tentativesEl.text(partie.tentatives)
     }
 
@@ -90,5 +99,21 @@ $(document).ready(function(){
     function effacer() {
         partie.proposition = 0
         $(".proposition span").text("--")
+    }
+
+    function modifierTemps() {
+        if (partie.fini) return
+
+        partie.tempsEcoule++
+        $("#temps").text(`${partie.tempsEcoule}s`)
+
+        if (partie.tempsEcoule == 59) {
+            terminerPartie()
+        }
+    }
+
+    function terminerPartie() {
+        partie.fini = true
+        clearInterval(chrono)
     }
 })
