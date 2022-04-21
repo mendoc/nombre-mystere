@@ -1,6 +1,7 @@
 $(document).ready(function(){
     // Variables
     let partie = {}
+    let tentativesEl = $("#tentatives")
     let messageNouvPartie = "Quel est le nombre mystère ? <br> Il est compris entre 1 et 100"
 
     // Traitement principal
@@ -8,6 +9,8 @@ $(document).ready(function(){
 
     // Evenements
     $(".chiffre").click(function(e){
+        if (partie.fini) return
+
         const chiffre = $(this).data("chiffre")
         const saisie = parseInt(chiffre)
         
@@ -25,6 +28,8 @@ $(document).ready(function(){
     })
 
     $("#btn-effacer").click(function(e){
+        if (partie.fini) return
+        
         effacer()
     })
 
@@ -39,11 +44,16 @@ $(document).ready(function(){
 
     // Fonctions
     function valider() {
+        if (partie.fini) return
+
         let comparaison = ""
         let message = ""
+
+        partie.tentatives++
         
         if (partie.nombre === partie.proposition) {
             message = `Bravo ! vous avez trouvé le nombre mystère`
+            partie.fini = true
         } else {
             if (partie.nombre < partie.proposition) comparaison = "plus petit"
             else if (partie.nombre > partie.proposition) comparaison = "plus grand"
@@ -52,6 +62,7 @@ $(document).ready(function(){
         
         $("#message").html(message)
         partie.proposition = 0
+        tentativesEl.text(partie.tentatives)
     }
 
     function nouvellePartie() {
@@ -59,13 +70,15 @@ $(document).ready(function(){
             proposition : 0,
             MIN: 1,
             MAX: 100,
-            tentatives: 10
+            tentatives: 0,
+            fini: false,
         }
 
         partie.nombre = Math.floor(Math.random() * partie.MAX) + 1
 
         effacer()
         $("#message").html(messageNouvPartie)
+        tentativesEl.text(partie.tentatives)
     }
 
     function modifierProposition(propo) {
