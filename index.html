@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Nombre Mystère</title>
 
     <style>
-        body, #grille {
+        body,
+        #grille {
             max-width: 420px;
             margin: auto;
         }
+
         #pub {
             height: 80px;
             background-size: cover;
             background-position: center;
         }
+
         .proposition {
             border-bottom: 5px solid black;
             max-width: 180px;
@@ -26,14 +31,17 @@
             font-size: 2.5em;
             font-weight: bold;
         }
+
         #grille {
             background-color: #F0F1ED;
         }
+
         .ligne {
             display: flex;
             justify-content: space-between;
             padding: 5px 10px;
         }
+
         .touche {
             border: none;
             width: 80px;
@@ -43,10 +51,23 @@
             font-size: 1.6em;
             font-weight: bold;
         }
+
+        .centrer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icone {
+            height: 35px;
+        }
     </style>
 </head>
+
 <body class="">
-    <div id="pub" style="background-image: url(https://www.bizcongo.com/medias/styles/thumb_1920_510/public/airtel-doubleimpact-cover-2.png?itok=fcZEiWpe);"></div>
+    <div id="pub"
+        style="background-image: url(https://www.bizcongo.com/medias/styles/thumb_1920_510/public/airtel-doubleimpact-cover-2.png?itok=fcZEiWpe);">
+    </div>
     <div class="d-flex justify-content-between px-2 mt-2 fw-bold">
         <div>
             <span>Temps écoulé :</span>
@@ -63,32 +84,68 @@
     <p id="message" class="text-center mt-4">Quel est le nombre mystère ? <br> Il est compris entre 1 et 100</p>
     <div id="grille" class="mt-5 py-3 fixed-bottom">
         <div class="ligne">
-            <button data-valeur="NP" class="touche" id="btn-nouvelle-partie">NP</button>
+            <button data-valeur="NP" class="touche bg-warning centrer" id="btn-nouvelle-partie">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icone" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
             <button data-chiffre="1" class="touche chiffre">1</button>
             <button data-chiffre="2" class="touche chiffre">2</button>
             <button data-chiffre="3" class="touche chiffre">3</button>
         </div>
         <div class="ligne">
-            <button data-valeur="SF" class="touche">SF</button>
+            <button data-valeur="SF" class="touche centrer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icone" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
+                        clip-rule="evenodd" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                </svg>
+            </button>
             <button data-chiffre="4" class="touche chiffre">4</button>
             <button data-chiffre="5" class="touche chiffre">5</button>
             <button data-chiffre="6" class="touche chiffre">6</button>
         </div>
         <div class="ligne">
-            <button data-valeur="TH" class="touche">TH</button>
+            <button data-valeur="PA" class="touche centrer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icone" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </button>
             <button data-chiffre="7" class="touche chiffre">7</button>
             <button data-chiffre="8" class="touche chiffre">8</button>
             <button data-chiffre="9" class="touche chiffre">9</button>
         </div>
         <div class="ligne">
-            <button data-valeur="PA" class="touche">PA</button>
-            <button data-valeur="C" class="touche" id="btn-effacer">x</button>
+            <button data-valeur="TH" class="touche bg-secondary"></button>
+            <button data-valeur="C" class="touche centrer" id="btn-effacer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icone" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
+                </svg>
+            </button>
             <button data-chiffre="0" class="touche chiffre">0</button>
-            <button data-valeur="OK" class="touche bg-success text-white" id="btn-valider">v</button>
+            <button data-valeur="OK" class="touche bg-success text-white centrer" id="btn-valider">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icone" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </button>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
+
 </html>
