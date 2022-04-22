@@ -1,44 +1,49 @@
-$(document).ready(function(){
+$(document).ready(function () {
     // Variables
     let partie = {}
     let tentativesEl = $("#tentatives")
     let messageNouvPartie = "Quel est le nombre mystère ? <br> Il est compris entre 1 et 100"
     let chrono = null;
+    let sonChiffre = new Howl({
+        src: ['assets/son/clic.wav']
+    });
 
     // Traitement principal
     nouvellePartie()
 
     // Evenements
-    $(".chiffre").click(function(e){
+    $(".chiffre").click(function (e) {
         if (partie.fini) return
 
         const chiffre = $(this).data("chiffre")
         const saisie = parseInt(chiffre)
-        
+
         // Il y a deux chiffres saisis
         if (partie.proposition > 9) partie.proposition = 0
-        
+
         if (partie.proposition === 0) { // Il n'y a pas de proposition
             partie.proposition = saisie
+            sonChiffre.play()
             modifierProposition(partie.proposition)
         } else if (partie.proposition > 0 && partie.proposition < 10) { // Il y a déjà un chiffre saisi
             partie.proposition = partie.proposition * 10 + saisie
+            sonChiffre.play()
             modifierProposition(partie.proposition)
             valider()
         }
     })
 
-    $("#btn-effacer").click(function(e){
+    $("#btn-effacer").click(function (e) {
         if (partie.fini) return
-        
+
         effacer()
     })
 
-    $("#btn-nouvelle-partie").click(function(e){
+    $("#btn-nouvelle-partie").click(function (e) {
         nouvellePartie()
     })
 
-    $("#btn-valider").click(function(e) {
+    $("#btn-valider").click(function (e) {
         if (partie.proposition === 0) return
         valider()
     })
@@ -56,7 +61,7 @@ $(document).ready(function(){
         if (partie.tentatives == 1) {
             chrono = setInterval(modifierTemps, 1000);
         }
-        
+
         if (partie.nombre === partie.proposition) {
             message = `Bravo ! vous avez trouvé le nombre mystère`
             partie.fini = true
@@ -66,7 +71,7 @@ $(document).ready(function(){
             else if (partie.nombre > partie.proposition) comparaison = "plus grand"
             message = `Le nombre mystère est <span class="fw-bold">${comparaison}</span> que ${partie.proposition}`
         }
-        
+
         $("#message").html(message)
         partie.proposition = 0
         tentativesEl.text(partie.tentatives)
@@ -74,7 +79,7 @@ $(document).ready(function(){
 
     function nouvellePartie() {
         partie = {
-            proposition : 0,
+            proposition: 0,
             MIN: 1,
             MAX: 100,
             tentatives: 0,
