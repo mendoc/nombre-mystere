@@ -78,6 +78,10 @@ $(document).ready(function () {
     }
 
     function nouvellePartie() {
+        if (!partie.fini) {
+            terminerPartie()
+        }
+
         partie = {
             proposition: 0,
             MIN: 1,
